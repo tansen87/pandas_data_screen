@@ -161,19 +161,6 @@ class MyMainForm(QMainWindow, Ui_MainWindow):
                                  "NameError: name 'sep_char' is not defined -> 未点击🔍按钮\n"
                                  "NameError: name 'targets' is not defined -> 未选择筛选条件\n"
                                  "NameError: name 'file_out' is not defined -> 未选择文件保存路径")
-        # self.textBrowser.setText("Ⅰ 该代码解决的问题:\n"
-        #                          "1. 从一列数据里筛分成N个xlsx文件或csv文件;\n"
-        #                          "2. 默认拆分为xlsx文件,当文件大于104w行时拆分为csv文件.\n\n"
-        #                          "Ⅱ 开始使用:\n"
-        #                          "1. 点击第一个紫色📂图标,选择需要拆分的csv或xlsx文件;\n"
-        #                          "2. 点击第二个紫色🐖图标,选择文件保存的路径;\n"
-        #                          "3. 点击第三个紫色📎图标,选择拆分的条件,记得删除最后一个空行哦;\n"
-        #                          "4. 在 “带筛选的列” 里输入筛分的列名,在 “文件分割符号” 里输入文件分隔符,\n"
-        #                          "   点击第四个逆时针旋转Ⅲ图标;\n"
-        #                          "5. 点击第五个🏃图标,运行程序.\n\n"
-        #                          "Ⅲ Notice:\n"
-        #                          "1. 如果拆分的是xlsx文件,那就不用输入文件分隔符;\n"
-        #                          "2. 建议拆分文件前先用EmEditor把文件编码更改为 “UTF-8无签名”.")
 
 
 class HandleThread(QThread):
@@ -228,6 +215,10 @@ class HandleThread(QThread):
 
         except NameError as e:
             err = f"NameError: {e}"
+            self.write(err)
+            self.log.write_log(err)
+        except ModuleNotFoundError as e:
+            err = f"ModuleNotFoundError: {e}"
             self.write(err)
             self.log.write_log(err)
         except Exception as e:
